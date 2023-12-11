@@ -8,8 +8,8 @@ class BreathingActivity : Activity
 
     public BreathingActivity(string OSName, string OSDescription) : base(OSName, OSDescription)
     {
-        OSName = OSName;
-        OSDescription = OSDescription;
+        this.OSName = OSName;
+        this.OSDescription = OSDescription;
 
 
     }
@@ -21,7 +21,7 @@ class BreathingActivity : Activity
             Console.Write("Would you like to breathe in 4 second intervals or 7 second intervals? ");
 
             int OSPauseTime = int.Parse(Console.ReadLine());
-            if (OsPauseTime == 4 || OSPauseTime == 7)
+            if (OSPauseTime == 4 || OSPauseTime == 7)
             {
                 OSPause = OSPauseTime;
                 OSPauseAssigned = true;
