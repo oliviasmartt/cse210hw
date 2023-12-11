@@ -12,17 +12,16 @@ class Activity
 
     public Activity(string OSName, string OSDescription)
     {
-        OSName = OSName;
-        OSDescription = OSDescription;
-        //EesStartingMessage();
+        this.OSName = OSName;
+        this.OSDescription = OSDescription;
     }
 
 
     public Activity(string OSName, string OSDescription, List<string> OSPrompts)
     {
-        OSName = OSName;
-        OSDescription = OSDescription;
-        OSPrompts = OSPrompts;
+        this.OSName = OSName;
+        this.OSDescription = OSDescription;
+        this.OSPrompts = OSPrompts;
     }
     protected void OSCreateAnimation(int time)
     {
