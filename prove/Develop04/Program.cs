@@ -2,67 +2,67 @@ using System;
 
 class Program
 {
-
     static void Main(string[] args)
     {
-        // This will clear the console
-        Console.Clear();
-        Console.Write("\n*** Welcome to the Mindfulness Program ****\n");
-        //Call Choices
-        Choices choice = new Choices();
-        int seconds;
+        Console.WriteLine("Hello Develop04 World!");
+        int OSMenuChoice = 0;
 
-        int action = 0;
-        while (action != 4)
+        while (OSMenuChoice != 4)
         {
-            // Ask for user input (1-4)
-            action = choice.UserChoice();
-            switch (action)
+            OSMenuChoice = OSMenu();
+            if (OSMenuChoice == 1)
             {
-                case 1:
-                    // Start Breathing Activity
-                    Console.Clear();
-                    BreathingActivity breathing = new BreathingActivity("Breathing", 0);
-                    breathing.GetActivityName();
-                    breathing.GetActivityDescription();
-                    seconds = breathing.GetActivityTime();
-                    breathing.GetReady();
-                    breathing.Breathing(seconds);
-                    breathing.GetDone();
-                    break;
-                case 2:
-                    //Start Reflecting Activity
-                    Console.Clear();
-                    ReflectingActivity reflecting = new ReflectingActivity("Reflecting", 0);
-                    reflecting.GetActivityName();
-                    reflecting.GetActivityDescription();
-                    seconds = reflecting.GetActivityTime();
-                    reflecting.GetReady();
-                    reflecting.ShowPrompt(seconds);
-                    reflecting.GetDone();
-                    break;
-                case 3:
-                    //Start Listing Activity
-                    Console.Clear();
-                    ListingActivity listing = new ListingActivity("Listing", 0);
-                    listing.GetActivityName();
-                    listing.GetActivityDescription();
-                    seconds = listing.GetActivityTime();
-                    listing.GetReady();
-                    listing.ReturnPrompt(seconds);
-                    listing.GetDone();
-                    break;
-                case 4:
-                    // Quite
-                    Console.WriteLine("\nThank you for using the Mindfulness Program!\n");
-                    break;
-                default:
-                    Console.WriteLine($"\nSorry the option you entered is not valid.");
-                    break;
+                BreathingActivity OSActivity = new BreathingActivity("Breathing Activity", "This Activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing. ");
+                OSActivity.OSRunActivity();
+
+            }
+            else if (OSMenuChoice == 2)
+            {
+                string OSReflectionDescription = "this activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life. ";
+                List<string> OSReflectionPrompts = new List<string>{
+                    "Think of a time when you stood up for someone else. ",
+                    "Think of a time when you did something really difficult. ",
+                    "Think of a time when you helped someone in need. ",
+                    "Think of a time when you did something truly selfless. "
+                };
+                ReflectionActivity OSActivity = new ReflectionActivity("Reflection Activity", OSReflectionDescription, OSReflectionPrompts, 8);
+                OSActivity.OSRunActivity();
+            }
+            else if (OSMenuChoice == 3)
+            {
+                string OSListingDescription = "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area. ";
+                List<string> OSListingPrompts = new List<string>{
+                    "Who are people that you appreciate? ",
+                    "What are personal strengths of yours? ",
+                    "Who are people that you have helped this week? ",
+                    "When have you felt the Holy Ghost this month? ",
+                    "Who are some of your personal heroes? "
+                };
+                ListingActivity OSActivity = new ListingActivity("Listing Activity", OSListingDescription, OSListingPrompts);
+                OSActivity.OSRunActivity();
+            }
+            else if (OSMenuChoice == 4)
+            {
+                Console.WriteLine("Thank you for participating in the mindfulness activities! ");
+
+            }
+            else
+            {
+                Console.WriteLine("That was not a menu option. Please select a number from the menu. ");
             }
         }
-
-
     }
 
+
+    static int OSMenu()
+    {
+        Console.WriteLine("Menu Options:");
+        Console.WriteLine("  1. Start breathing activity");
+        Console.WriteLine("  2. Start reflecting activity");
+        Console.WriteLine("  3. Start listing activity");
+        Console.WriteLine("  4. Quit");
+        Console.Write("Select a choice from the menu: ");
+        int OSMenuChoice = int.Parse(Console.ReadLine());
+        return OSMenuChoice;
+    }
 }

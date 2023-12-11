@@ -1,65 +1,109 @@
 using System;
 
-public class Activity
+class Activity
 {
-    // Attributes
-    private string _activityName;
-    private int _activityTime;
-    private string _message = "You may begin in...";
+    protected string OSName;
+    protected string OSDescription;
+    protected int OSDuration;
+    protected List<string> OSPrompts = new List<string>();
+    private List<string> OSAnimationItems = new List<string> { "|", "/", "-", "\\" };
 
-    // Constructors
-    public Activity(string activityName, int activityTime)
+
+
+    public Activity(string OSName, string OSDescription)
     {
-        _activityName = activityName;
-        _activityTime = activityTime;
-    }
-    public void GetActivityName()
-    {
-        Console.WriteLine($"Welcome to the {_activityName} Activity\n");
-    }
-    public void SetActivityName(string activityName)
-    {
-        _activityName = activityName;
-    }
-    public int GetActivityTime()
-    {
-        Console.Write("\nHow long, in seconds, would you like for your session? ");
-        int userSeconds = Int32.Parse(Console.ReadLine());
-        _activityTime = userSeconds;
-        return userSeconds;
-    }
-    public void SetActivityTime(int activityTime)
-    {
-        _activityTime = activityTime;
+        OSName = OSName;
+        OSDescription = OSDescription;
+        //EesStartingMessage();
     }
 
-    // Methods
-    public void GetReady()
-    {
-        Console.Clear();
-        Spinner spinner = new Spinner();
-        spinner.ShowSpinnerReady();
-    }
 
-    public void GetDone()
+    public Activity(string OSName, string OSDescription, List<string> OSPrompts)
     {
-        Spinner spinner = new Spinner();
-        spinner.ShowSpinnerDone();
-        Console.WriteLine($"\nYou have completed another {_activityTime} seconds of the {_activityName} Activity!");
-        spinner.ShowSpinner();
+        OSName = OSName;
+        OSDescription = OSDescription;
+        OSPrompts = OSPrompts;
     }
-     public void CountDown(int time)
+    protected void OSCreateAnimation(int time)
     {
-        Console.WriteLine();  //insert blank line to start
-        for (int i = time; i > 0; i--)
+        DateTime OSStartTime = DateTime.Now;
+        DateTime OSEndTime = OSStartTime.AddSeconds(time);
+        int i = 0;
+        while (DateTime.Now < OSEndTime)
         {
-            Console.Write($"{_message}{i}");
-            Thread.Sleep(1000);
-            string blank = new string('\b', (_message.Length + 5));  // Overwrite line
-            Console.Write(blank);
+            string s = OSAnimationItems[i];
+            Console.Write(s);
+            Thread.Sleep(500);
+            Console.Write("\b \b");
+
+            i++;
+
+            if (i == OSAnimationItems.Count())
+            {
+                i = 0;
+            }
+
+
         }
-        Console.WriteLine($"Go:                                  ");  // last prompt
+        // foreach (string item in OSAnimationItems){
+        //     Console.Write(item);
+        //     Thread.Sleep(1000);
+        //     Console.Write("\b \b");
+
+        // }
     }
+
+    protected void OSCreateCountdown(int OSNumber)
+    {
+        for (int i = OSNumber; i > 0; i--)
+        {
+            Console.Write(i);
+            Thread.Sleep(1000);
+            Console.Write("\b \b");
+
+        }
+    }
+
+    protected int OSReturnRandomNumber(List<string> OSList)
+    {
+        Random OSGenerator = new Random();
+        int OSNumber = OSGenerator.Next(0, OSList.Count());
+        return OSNumber;
+    }
+    protected void OSStartingMessage()
+    {
+        Console.WriteLine($" Welcome to the{OSName}. ");
+        Console.WriteLine();
+        Console.WriteLine($"{OSDescription} ");
+        Console.WriteLine();
+        Thread.Sleep(2000);
+        Console.Write("How long, in seconds, would you like your session to last? ");
+
+        OSDuration = int.Parse(Console.ReadLine());
+
+
+        Thread.Sleep(1000);
+        Console.WriteLine($"Your activity will last for {OSDuration} seconds.");
+        Console.WriteLine();
+        Thread.Sleep(2000);
+        Console.Write("Get ready...");
+        OSCreateAnimation(5);
+        Console.WriteLine();
+        // Thread.Sleep(2000);
+    }
+
+    protected void OSEndingMessage()
+    {
+        Console.WriteLine("Well done!");
+        Console.WriteLine();
+        Thread.Sleep(2000);
+        Console.WriteLine($"You have completed another {OSDuration} seconds of {OSName}");
+        Thread.Sleep(2000);
+
+    }
+
+
+
 
 
 }

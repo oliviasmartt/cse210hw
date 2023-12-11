@@ -1,48 +1,65 @@
-using System;
-
-public class BreathingActivity : Activity
+class BreathingActivity : Activity
 {
-    // Attributes 
-    private string _message1 = "Breathe in...";
-    private string _message2 = "Now breathe out...";
-    private string _description = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.";
+    private string OSBreatheIn = "Breathe In...";
+    private string OSBreatheOut = "Breathe Out...";
+    private int OSPause;
 
-    // Constructors
-    // Methods
-    public BreathingActivity(string activityName, int activityTime) : base(activityName, activityTime)
+
+
+    public BreathingActivity(string OSName, string OSDescription) : base(OSName, OSDescription)
     {
+        OSName = OSName;
+        OSDescription = OSDescription;
+
 
     }
-    public void GetActivityDescription()
+    public void OSSetPause()
     {
-        Console.WriteLine(_description);
-    }
-
-    public void Breathing(int seconds)
-    {
-        Console.WriteLine();  //insert blank line to start
-        int secondsTimer = 0;
-        while (secondsTimer < seconds)
+        bool OSPauseAssigned = false;
+        do
         {
-            Console.WriteLine();  //insert blank line to start
-            for (int i = 4; i > 0; i--)
+            Console.Write("Would you like to breathe in 4 second intervals or 7 second intervals? ");
+
+            int OSPauseTime = int.Parse(Console.ReadLine());
+            if (OsPauseTime == 4 || OSPauseTime == 7)
             {
-                Console.Write($"{_message1}{i}");
-                Thread.Sleep(1000);
-                string blank = new string('\b', (_message1.Length + 2));  // Overwrite line
-                Console.Write(blank);
-                secondsTimer += 1;
+                OSPause = OSPauseTime;
+                OSPauseAssigned = true;
             }
-            Console.WriteLine($"{_message1}  ");  // last prompt
-            for (int i = 5; i > 0; i--)
+            else
             {
-                Console.Write($"{_message2}{i}");
-                Thread.Sleep(1000);
-                string blank = new string('\b', (_message2.Length + 2));  // Overwrite line
-                Console.Write(blank);
-                secondsTimer += 1;
+                Console.WriteLine("You must choose either 4 or 7.");
             }
-            Console.WriteLine($"{_message2}  ");  // last prompt
-        }
+        } while (OSPauseAssigned == false);
+
     }
+
+
+
+
+
+    public void OSRunActivity()
+    {
+
+        base.OSStartingMessage();
+        OSSetPause();
+        DateTime OSStartActivity = DateTime.Now;
+        DateTime OSEndTime = OSStartActivity.AddSeconds(OSDuration);
+
+        while (DateTime.Now < OSEndTime)
+        {
+            Console.Write(OSBreatheIn);
+            OSCreateCountdown(OSPause);
+            Console.WriteLine();
+            Console.Write(OSBreatheOut);
+            OSCreateCountdown(OSPause);
+            Console.WriteLine();
+
+        }
+
+        base.OSEndingMessage();
+        Thread.Sleep(2000);
+        Console.Clear();
+    }
+
 }
