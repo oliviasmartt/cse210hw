@@ -18,7 +18,7 @@ class ReflectionActivity : Activity
 
     public ReflectionActivity(string OSName, string OSDescription, List<string> OSPrompts, int OSTimePerQuestion) : base(OSName, OSDescription, OSPrompts)
     {
-        OSTimePerQuestion = OSTimePerQuestion;
+        this.OSTimePerQuestion = OSTimePerQuestion;
     }
 
 
