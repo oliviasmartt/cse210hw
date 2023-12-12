@@ -15,7 +15,7 @@ class ListingActivity : Activity
         OSUserInputs.Add(OSNewInput);
     }
 
-    public void EesRunActivity()
+    public void OSRunActivity()
     {
 
         OSStartingMessage();
